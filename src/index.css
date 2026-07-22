@@ -1,0 +1,76 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  font-family: "DM Sans", ui-sans-serif, system-ui, sans-serif;
+  line-height: 1.6;
+  font-weight: 400;
+  color: #2a2622;
+  background-color: #f5f0e6;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  background-color: #f5f0e6;
+  /* 暖纸纹理：极淡的噪点叠加，营造手账质感 */
+  background-image:
+    radial-gradient(circle at 12% 18%, rgba(181, 101, 29, 0.04), transparent 42%),
+    radial-gradient(circle at 88% 82%, rgba(107, 142, 107, 0.05), transparent 46%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
+  background-attachment: fixed;
+}
+
+/* 数字与金额默认用等宽字体，强化账目感 */
+.tabular {
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-variant-numeric: tabular-nums;
+}
+
+::selection {
+  background: rgba(181, 101, 29, 0.18);
+  color: #2a2622;
+}
+
+/* 自定义滚动条 */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(42, 38, 34, 0.15);
+  border-radius: 9999px;
+  border: 3px solid transparent;
+  background-clip: content-box;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(42, 38, 34, 0.28);
+  background-clip: content-box;
+}
+
+input:focus {
+  outline: none;
+}
+
+@layer components {
+  .card {
+    @apply rounded-2xl bg-paper-50/80 backdrop-blur-sm border border-line shadow-paper;
+  }
+  .chip {
+    @apply inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-sm transition-colors;
+  }
+}
