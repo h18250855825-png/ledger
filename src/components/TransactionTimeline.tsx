@@ -61,7 +61,7 @@ export default function TransactionTimeline({ limit = 50 }: { limit?: number }) 
                 <span className="text-xs text-ink-faint">
                   {weekdayLabel(date)}
                 </span>
-                <span className="tabular ml-auto text-xs text-ink-muted">
+                <span className="tabular ml-auto text-sm font-medium text-clay">
                   ¥{items.reduce((s, t) => s + t.amount, 0).toFixed(2)}
                 </span>
               </div>
@@ -108,24 +108,31 @@ function TimelineRow({ tx }: { tx: Transaction }) {
   if (editing) {
     return (
       <li className="rounded-xl border border-line bg-paper-50 p-4">
-        <div className="flex flex-col gap-3">
-          <div className="flex items-center gap-2">
-            <span className="text-xs text-ink-faint">用途</span>
+        <div className="flex flex-col gap-4">
+          <div>
+            <label className="mb-1.5 block text-xs text-ink-faint">用途</label>
             <input
               value={draftPurpose}
               onChange={(e) => setDraftPurpose(e.target.value)}
-              className="flex-1 border-b border-line bg-transparent pb-1 text-sm text-ink focus:border-clay"
-            />
-            <span className="text-xs text-ink-faint">金额</span>
-            <input
-              value={draftAmount}
-              onChange={(e) => setDraftAmount(e.target.value)}
-              inputMode="decimal"
-              className="tabular w-20 border-b border-line bg-transparent pb-1 text-right text-sm text-ink focus:border-clay"
+              className="w-full border-b border-line bg-transparent pb-1.5 text-base text-ink focus:border-clay"
+              placeholder="输入用途"
             />
           </div>
+          <div className="flex items-center gap-3">
+            <label className="text-xs text-ink-faint">金额</label>
+            <div className="relative flex-1">
+              <span className="absolute left-0 top-1/2 -translate-y-1/2 text-sm text-ink-faint">¥</span>
+              <input
+                value={draftAmount}
+                onChange={(e) => setDraftAmount(e.target.value)}
+                inputMode="decimal"
+                className="tabular w-full border-b border-line bg-transparent py-1.5 pl-5 text-right text-xl font-display font-semibold text-clay focus:border-clay"
+                placeholder="0.00"
+              />
+            </div>
+          </div>
           <CategoryChips value={draftCat} onChange={setDraftCat} />
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 pt-1">
             <button
               onClick={save}
               className="flex items-center gap-1 rounded-lg bg-ink px-3 py-1.5 text-xs text-paper-50 hover:bg-ink-soft"
